@@ -1,0 +1,20 @@
+[build]
+target = "index.html"
+dist = "dist"
+
+[serve]
+port = 5173
+
+# Tailwind: needs `npm install` once in this folder. `node` resolves on Windows and Linux (the npm shim does not).
+[[hooks]]
+stage = "pre_build"
+command = "node"
+command_arguments = ["node_modules/tailwindcss/lib/cli.js", "-c", "tailwind.config.js", "-i", "style/input.css", "-o", "style/out.css"]
+
+# `trunk serve` on :5173 forwards the API and sockets to the Rust server on :8000. Start that server with
+# HAST_ALLOWED_ORIGINS=http://localhost:5173 so its Origin check lets the proxied requests through.
+[[proxy]]
+backend = "http://localhost:8000/api/"
+[[proxy]]
+backend = "ws://localhost:8000/ws"
+ws = true

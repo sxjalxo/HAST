@@ -1,0 +1,8 @@
+target
+**/node_modules
+**/dist
+.git
+*.jsonl
+_gd_fallback_storage.json
+hast.db*
+e2e

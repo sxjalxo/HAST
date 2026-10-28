@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = ["crates/hast-core", "crates/hast-server", "crates/hast-web"]
+default-members = ["crates/hast-core", "crates/hast-server", "crates/hast-web"]
+
+[profile.release]
+opt-level = "z"
+lto = true
+
+# crypto is far too slow unoptimised (SPHINCS+ in wasm), so optimise dependencies and the core crate in dev builds
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.dev.package.hast-core]
+opt-level = 3

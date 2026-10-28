@@ -1,0 +1,15 @@
+services:
+  hast:
+    build: .
+    ports:
+      - "8000:8000"   # web UI, account API, LiveChat and messaging sockets
+    environment:
+      HAST_SIGNUP: open            # open | invite | closed
+      # HAST_INVITE_CODE: change-me
+      # HAST_COOKIE_SECURE: "1"    # when served over HTTPS
+      # HAST_TRUSTED_PROXIES: 172.17.0.1   # your reverse proxy, so throttling sees client IPs
+    volumes:
+      - hast-data:/data
+    restart: unless-stopped
+volumes:
+  hast-data:

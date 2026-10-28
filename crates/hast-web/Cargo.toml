@@ -1,0 +1,22 @@
+[package]
+name = "hast-web"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hast-core = { path = "../hast-core" }
+leptos = { version = "0.8", features = ["csr"] }
+leptos_router = "0.8"
+console_error_panic_hook = "0.1"
+gloo-net = { version = "0.6", default-features = false, features = ["websocket", "http", "json"] }
+gloo-timers = { version = "0.3", features = ["futures"] }
+futures = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+qrcode = { version = "0.14", default-features = false, features = ["svg"] }
+js-sys = "0.3"
+web-sys = { version = "0.3", features = ["Window", "Storage", "HtmlAudioElement", "Location", "Document", "Element", "HtmlElement", "HtmlInputElement", "Performance", "Navigator", "Clipboard", "Blob", "BlobPropertyBag", "Url", "HtmlAnchorElement", "File", "FileList", "Worker", "MessageEvent", "DedicatedWorkerGlobalScope", "Event", "CredentialsContainer", "CredentialCreationOptions", "CredentialRequestOptions", "IdbFactory", "IdbDatabase", "IdbObjectStore", "IdbOpenDbRequest", "IdbRequest", "IdbTransaction", "IdbTransactionMode"] }
+wasm-bindgen = "0.2"
+hex = "0.4"
+base64 = "0.22"
+wasm-bindgen-futures = "0.4"

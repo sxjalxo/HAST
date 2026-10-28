@@ -1,0 +1,12 @@
+target/
+dist/
+node_modules/
+crates/hast-web/style/out.css
+_gd_fallback_storage.json*
+_chat_history.jsonl
+*.log
+hast.db*
+e2e/.tmp/
+e2e/test-results/
+e2e/playwright-report/
+.claude/

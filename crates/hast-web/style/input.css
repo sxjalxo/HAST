@@ -1,0 +1,283 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* HAST design system: dark graphite, electric crimson, cold silver, with status colours that never borrow the
+   brand accent. The values live in tailwind.config.js (`hast`); these variables expose them to plain CSS. */
+
+@layer base {
+  :root {
+    color-scheme: dark;
+
+    --hast-bg: theme('colors.hast.bg');
+    --hast-surface: theme('colors.hast.surface');
+    --hast-elevated: theme('colors.hast.elevated');
+    --hast-border: theme('colors.hast.border');
+
+    --hast-primary: theme('colors.hast.primary');
+    --hast-primary-hover: theme('colors.hast.primary-hover');
+
+    --hast-text: theme('colors.hast.text');
+    --hast-text-secondary: theme('colors.hast.secondary');
+    --hast-text-muted: theme('colors.hast.muted');
+
+    --hast-verified: theme('colors.hast.verified');
+    --hast-warning: theme('colors.hast.warning');
+    --hast-danger: theme('colors.hast.danger');
+    --hast-link: theme('colors.hast.link');
+
+    --radius: 0.5rem;
+  }
+
+  * {
+    @apply border-hast-border;
+  }
+
+  html {
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-hast-bg text-hast-text font-sans antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: theme('colors.hast.primary / 35%');
+    color: var(--hast-text);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--hast-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--hast-border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--hast-text-muted);
+  }
+
+  a {
+    @apply transition-colors;
+  }
+
+  /* Keyboard focus is always visible: a crimson outline, unless a component draws its own ring. */
+  :focus-visible {
+    outline: 2px solid theme('colors.hast.primary');
+    outline-offset: 2px;
+  }
+
+  /* "Skip to content": off screen until it gets keyboard focus. */
+  .skip-link {
+    @apply absolute left-2 top-2 z-50 -translate-y-20 rounded-md bg-hast-primary px-3 py-2 text-sm font-medium text-white;
+  }
+
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+}
+
+@layer components {
+  /* Graphite panel: cards, chat panels, sidebars */
+  .hast-panel {
+    @apply rounded-lg border border-hast-border bg-hast-surface;
+  }
+
+  /* Primary action: crimson with white text */
+  .hast-button {
+    @apply bg-hast-primary text-white font-semibold;
+  }
+
+  .hast-button:hover:not(:disabled) {
+    @apply bg-hast-primary-hover;
+  }
+
+  .hast-input {
+    @apply bg-hast-elevated border-hast-border text-hast-text;
+  }
+
+  .hast-input:focus {
+    @apply border-hast-primary;
+    box-shadow: 0 0 0 1px theme('colors.hast.primary');
+  }
+
+  .hast-input::placeholder {
+    @apply text-hast-muted;
+  }
+
+  /* List row inside a panel (message previews, log lines) */
+  .hast-row {
+    @apply rounded-md border border-hast-border bg-hast-elevated/60 p-4 transition-colors;
+  }
+
+  .hast-row:hover {
+    @apply border-hast-muted/60;
+  }
+
+  /* Page and section titles: silver, tight and technical */
+  .hast-title {
+    @apply text-hast-text font-semibold tracking-tight;
+  }
+
+  /* Small uppercase label above values and groups */
+  .hast-label {
+    @apply text-[11px] font-medium uppercase tracking-[0.12em] text-hast-muted;
+  }
+
+  /* Technical values: hashes, keys, signatures */
+  .hast-mono {
+    @apply font-mono text-[12px] text-hast-secondary break-all;
+  }
+
+  /* Status text: each status has its own colour and is always paired with a label */
+  .status-secure {
+    @apply text-hast-verified;
+  }
+
+  .status-warning {
+    @apply text-hast-warning;
+  }
+
+  .status-danger {
+    @apply text-hast-danger;
+  }
+
+  .status-blackberry {
+    @apply text-hast-link;
+  }
+
+  /* Status chips */
+  .chip-verified {
+    @apply border-hast-verified/40 bg-hast-verified/10 text-hast-verified;
+  }
+
+  .chip-warning {
+    @apply border-hast-warning/40 bg-hast-warning/10 text-hast-warning;
+  }
+
+  .chip-danger {
+    @apply border-hast-danger/50 bg-hast-danger/10 text-hast-danger;
+  }
+
+  .chip-neutral {
+    @apply border-hast-border bg-hast-elevated text-hast-secondary;
+  }
+
+  /* Navigation item; the active one carries the crimson marker */
+  .nav-item {
+    @apply relative flex items-center gap-3 rounded-md px-3 py-2 text-sm text-hast-secondary transition-colors;
+  }
+
+  .nav-item:hover {
+    @apply bg-hast-elevated text-hast-text;
+  }
+
+  .nav-item[aria-current='page'] {
+    @apply bg-hast-primary/10 text-hast-text;
+  }
+
+  .nav-item[aria-current='page']::before {
+    content: '';
+    @apply absolute left-0 top-1.5 bottom-1.5 w-[2px] rounded-full bg-hast-primary;
+  }
+
+  .nav-item[aria-current='page'] svg {
+    @apply text-hast-primary;
+  }
+
+  .bb-secure-channel {
+    @apply border border-hast-link/40 bg-hast-link/5;
+  }
+
+  .crypto-strength-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .strength-bar {
+    width: 4px;
+    height: 20px;
+    border-radius: 2px;
+    @apply bg-hast-elevated transition-colors;
+  }
+
+  .strength-bar.active {
+    @apply bg-hast-verified;
+  }
+}
+
+@layer utilities {
+  @keyframes decrypt-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes vault-unlock {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes data-stream {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    10%,
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+
+  .animate-decrypt-reveal {
+    animation: decrypt-reveal 0.4s ease-out;
+  }
+
+  .animate-vault-unlock {
+    animation: vault-unlock 0.4s ease-out;
+  }
+
+  .animate-data-stream {
+    animation: data-stream 2s ease-in-out infinite;
+  }
+
+
+  .gradient-threat {
+    @apply bg-hast-danger/15;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

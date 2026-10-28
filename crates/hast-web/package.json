@@ -1,0 +1,6 @@
+{
+  "name": "hast-web-styles",
+  "private": true,
+  "scripts": { "css": "tailwindcss -c tailwind.config.js -i style/input.css -o style/out.css" },
+  "devDependencies": { "tailwindcss": "3.4.17", "tailwindcss-animate": "1.0.7" }
+}
